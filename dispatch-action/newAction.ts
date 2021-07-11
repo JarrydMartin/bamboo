@@ -1,14 +1,21 @@
 export const newAction = async (options: string[]) => {
-  console.log("🌟 Starting new project...\n");
-
   const projectName = options[0];
   // Create a folder call the project name
 
   if (projectName) {
-    console.log(`🌎 Creating ${projectName} workspace...`);
+    console.log("🌟 Starting new ${projectName} project...\n");
     await Deno.mkdir(projectName);
     Deno.chdir(`./${projectName}`);
-    console.log(Deno.cwd());
+
+    const pNpx = Deno.run({
+      cmd: ["npx", "create-react-app", "app", "--template", "typescript"],
+    });
+    await pNpx.status();
+
+    const pCode = Deno.run({
+      cmd: ["code", "."],
+    });
+    await pCode.status();
   } else {
     console.log(
 "Oops! 😮 \n\
