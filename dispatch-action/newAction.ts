@@ -3,7 +3,7 @@ export const newAction = async (options: string[]) => {
   // Create a folder call the project name
 
   if (projectName) {
-    console.log("🌟 Starting new ${projectName} project...\n");
+    console.log(`🌟 Starting new ${projectName} project...\n`);
     await Deno.mkdir(projectName);
     Deno.chdir(`./${projectName}`);
 
