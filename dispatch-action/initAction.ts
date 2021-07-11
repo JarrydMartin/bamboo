@@ -1,3 +1,3 @@
-export const initAction = () => {
-    console.log("🎆 Initiating...")
-}
+export const initAction = (options: string[]) => {
+  console.log("🎆 Initiating...");
+};
