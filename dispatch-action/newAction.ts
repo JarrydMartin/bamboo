@@ -37,6 +37,17 @@ export const newAction = async (options: string[]) => {
     await pGitPush.status();
     pGitPush.close();
 
+    const pAmpInit = Deno.run({
+      cmd: ["amplify", "init"],
+    });
+    await pAmpInit.status();
+    pAmpInit.close();
+
+    const pAmpHosting = Deno.run({
+      cmd: ["amplify", "hosting", "add"],
+    });
+    await pAmpHosting.status();
+    pAmpHosting.close();
 
     const pCode = Deno.run({
       cmd: ["code", "."],
