@@ -8,7 +8,6 @@ export const newAction = async (options: string[]) => {
     const pGitHub = Deno.run({
       cmd: ["gh", "repo", "create", projectName, '-y']
     })
-
      await pGitHub.status()
      pGitHub.close()
 
@@ -20,7 +19,24 @@ export const newAction = async (options: string[]) => {
     await pNpx.status();
     pNpx.close();
 
+    const pGitAdd = Deno.run({
+      cmd: ["git", "add", "."],
+    });
+    await pGitAdd.status();
+    pGitAdd.close();
+
+    const pGitCommit = Deno.run({
+      cmd: ["git", "commit", "-m", "\"init commit\""],
+    });
+    await pGitCommit.status();
+    pGitCommit.close();
     
+    const pGitPush = Deno.run({
+      cmd: ["git", "push", "--set-upstream", "origin", "main"],
+    });
+    await pGitPush.status();
+    pGitPush.close();
+
 
     const pCode = Deno.run({
       cmd: ["code", "."],
